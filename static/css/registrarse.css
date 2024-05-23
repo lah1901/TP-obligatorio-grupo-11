@@ -1,0 +1,564 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+}
+
+@font-face {
+    font-family: "bebasNeue";
+    src: url('../../assets/fonts/BebasNeue-Regular/BebasNeue-Regular.ttf');
+}
+
+@font-face {
+    font-family: "poetsenOne";
+    src: url('../../assets/fonts/Poetsen-One/PoetsenOne-Regular.ttf');
+} 
+
+
+
+
+
+/*::::: Encabezado :::::*/
+#cont-header {
+    background-image: url('../img/img-header-inicio.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #05070d;
+    width: 100%;
+    height: 25vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+ }
+
+ #logo-header{
+    width: 100px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #D966ba;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#nombre-web {
+    font-family: "poetsenOne";
+    color: #d966ba;
+    font-size: 40px;
+    margin-right: 420px;
+}
+
+#menu-header a:hover {
+    color: rgb(215, 102, 185); /* Cambia el color al hacer hover */
+}
+
+.hipervinc-header {
+    text-decoration: none;
+    border: 2px solid rgba(215, 102, 185, 0.45);
+    text-align: center;
+    width: 110px;
+    height: 40px;
+    background-color: rgba(10, 26, 42, 0.70);
+    margin-left: 20px;
+    padding: 10px;
+    font-family: "poetsenOne";
+    font-size:16px;
+    color: white;
+    transition: color 0.3s;
+}
+
+
+
+
+
+/*::::: Main :::::*/
+#cont-main {
+    background-image: url('../img/img-cont-main.jpg');
+    background-size: cover;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#cont-formulario {
+    background-color: #05070d;
+    padding: 10px 70px;
+    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    width: 55vw;
+}
+
+#formulario {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 50vw;
+}
+
+.campos-form {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 5px;
+    row-gap: 15px;
+    background-color: white;
+    border-radius: 15px;
+    font-family: "bebasNeue";
+}
+
+#radio-button {
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+}
+
+#imagen-form {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../img/img-header-form.png');
+    background-size: cover;
+    border-radius: 30px;
+}
+
+#mario {
+    width: 430px;
+    height: 430px;
+}
+
+.input-form {
+    width: 100%;
+    padding: 6px 8px;
+    font-size: 16px;
+    color: #495057;
+    background-color: white;
+    background-clip: padding-box;
+    border: 2px solid black;
+    border-radius: 25px;
+}
+
+.cont-btn-imgUsuario input[type="file"] {
+    appearance: none;
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    z-index: -1;
+}
+
+.cont-btn-imgUsuario {
+    display: inline-block;
+    position: relative;
+    background-color: #186CC3;
+    color: black;
+    border: 0;
+    width: 240px;
+    height: 40px;
+    
+    padding: 10px 0px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: ease-out 120ms background-color;
+}
+
+.cont-btn-imgUsuario:hover {
+    color: white;
+    background-color: #52B5F2;
+}
+
+.cont-btn-imgUsuario label {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    text-align: center;
+    text-justify: center;
+    cursor: pointer;
+}
+
+#crear-cuenta {
+    margin-left: 25%;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #D966ba;
+    font-family: "bebasNeue";
+    font-size: 25px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+#crear-cuenta:hover {
+    color: white;
+    background-color: #52B5F2;
+    transition: 0.5s;
+}
+
+#titulo {
+    font-family: "bebasNeue";
+    font-size: 16px;
+    color: white;
+}
+
+
+
+
+
+/*::::: Pie de Pagina :::::*/
+#cont-grupo-1{
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #0a141d;
+    padding-bottom: 30px;
+}
+
+#logo-footer{
+    width: 100px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 350px;
+}
+.titulo-footer{
+    color: #fff;
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+
+#cont-webjuegos{
+    margin-top:50px;
+    margin-right: 250px;
+}
+
+.webs-juegos{
+    text-decoration: none;
+    width: 45px;
+    height: 45px;
+    line-height: 40px;
+    color: #52B5F2;
+    font-family: "poetsenOne";
+} 
+
+#cont-webjuegos a:hover{
+    color: #D966ba;
+}
+
+#cont-redes{
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+.img-red{
+    width:30px;
+    height: 30px;
+}
+
+#cont-grupo-2{
+    text-align: center;
+    padding-top: 20px;
+    align-items: center;
+    background-color: #0a1a2a;
+    height: 10vh;
+    width: 100%;
+}
+
+#derechos{
+    font-family: "roboto";
+    color: #fff;
+    font-size: 20px;
+}
+
+
+
+
+
+/*::::: Media queries :::::*/
+@media screen and (max-width:1440px) {
+    #nombre-web {
+        margin-right: 420px;
+    }
+
+    .hipervinc-header{
+        margin-left: 25px;
+    }
+
+    .cont-btn-imgUsuario {
+        width: 260px;
+    }
+}
+
+@media screen and (max-width:1024px){
+    #nombre-web {
+        margin-right: 120px;
+    }
+
+    .hipervinc-header{
+        font-size:14px;
+    }
+
+    .cont-btn-imgUsuario {
+        width: 180px;
+    }
+
+    #crear-cuenta {
+        margin-right: 25%;
+    }
+
+    #logo-footer{
+        margin-right: 250px;
+    }
+    
+    #cont-webjuegos{
+        margin-top:50px;
+        margin-right: 150px;
+    }
+}
+
+@media screen and (min-width:1024px) and (max-width:1440px) {
+    .cont-btn-imgUsuario {
+        margin-left: 2px;
+     }
+}
+
+@media screen and (max-width:768px) {
+    #logo-header {
+        margin-right: 10px;
+    }
+    
+    #menu-header{ 
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+    }
+
+    #nombre-web {
+        margin-right: 80px;
+    }
+
+    .hipervinc-header{
+        font-size:12px;
+    }
+
+    #mario {
+        width: 350px;
+        height: 350px;
+    }
+
+    #radio-button {
+        display: flex;
+        flex-direction: row;
+        column-gap: 5px;
+    }
+
+    .cont-btn-imgUsuario {
+        width: 143px;
+    }
+
+    #logo-footer{
+        margin-right: 130px;
+    }
+}
+
+@media screen and (max-width:425px) {
+    header {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    #nombre-web {
+        font-size: 22px;
+        margin-right: 45px;
+    }
+    
+    #logo-header {
+        width: 75px;
+        height: 75px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .hipervinc-header {
+        margin-left: 13px;
+        font-size: 10px;
+        width: 75px;
+        height: 37px;
+    }
+
+    #menu-header{
+        margin-left: 20px;
+    }
+
+    #cont-formulario{
+        width: 85vw;
+    }
+    
+    #formulario {
+        width: 80vw;
+    }
+
+    #radio-button {
+        column-gap: 2px;
+    }
+
+    .campos-form {
+        font-size: 15px;
+    }
+
+    .cont-btn-imgUsuario {
+        width: 125px;
+    }
+
+    #crear-cuenta {
+        margin-left: 20%;
+    }
+
+    #derechos{
+        font-size: 13px;
+    }
+
+    footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #logo-footer {
+        margin-left: 10px;
+        margin-right: 50px;
+        height: 75px;
+        width: 75px;
+    }
+
+    .titulo-footer{
+        font-size: 16px;
+    }
+
+    #cont-webjuegos{
+        margin-right: 40px;
+    }
+
+    #cont-redes{
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
+} 
+
+@media screen and (max-width:375px) {
+    #menu-header{ 
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+    }
+    
+    #nombre-web {
+        font-size: 20px;
+        margin-right: 13px;
+    }
+    
+    #logo-header {
+        width: 65px;
+        height: 65px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .hipervinc-header {
+        font-size: 10px;
+        width: 75px;
+        height: 37px;
+    }
+
+    #cont-formulario{
+        width: 95vw;
+    }
+    
+    #formulario {
+        width: 90vw;
+    }
+
+    #radio-button {
+        column-gap: 3px;
+    }
+
+    .campos-form {
+        font-size: 15px;
+    }
+
+    #logo-footer{
+        margin-right: 30px;
+    }
+}
+
+@media screen and (max-width:320px) {
+    #menu-header{ 
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+    }
+    
+    #nombre-web {
+        font-size: 18px;
+        margin-right: 2px;
+    }
+    
+    #logo-header {
+        width: 60px;
+        height: 60px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .hipervinc-header {
+        font-size: 8px;
+        width: 65px;
+        height: 35px;
+        margin-left: 10px;
+    }
+
+    .campos-form {
+        font-size: 12px;
+    }
+
+    #mario {
+        width: 300px;
+        height: 300px;
+    }
+
+    .cont-btn-imgUsuario {
+        width: 103px;
+    }
+
+    #crear-cuenta {
+        margin-left: 15%;
+    }
+
+    #titulo {
+        text-align: center;
+    }
+
+    #cont-webjuegos{
+        margin-right: 20px;
+    }
+
+    #derechos{
+        font-size: 10px;
+    }
+}

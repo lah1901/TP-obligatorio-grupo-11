@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/foro.css">
+    <script src="https://kit.fontawesome.com/ce63497daf.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="../static/img/icon-fontawesome.png" type="image/png">
+    <title>Foro de Discusión</title>
+</head>
+
+<body>
+    <header>
+        <div id="cont-header">
+            <div>
+                <img id="logo-header" src="../static/img/logo.jpg" alt="logo">
+            </div>
+
+            <p id="nombre-web">Ratón Gamer</p>
+
+            <nav id="menu-header">
+                <a class="hipervinc-header" href="../index.html">Inicio</a>
+                <a class="hipervinc-header" href="trailers.html">Trailers</a>
+                <a class="hipervinc-header" href="reseñas.html">Reseñas</a>
+                <a class="hipervinc-header" href="registrarse.html">Registrarse</a>
+                <a class="hipervinc-header" href="iniciar-sesion.html">Iniciar sesión</a>
+            </nav>
+        </div>
+        
+    </header>
+
+    <main>
+        <h1>Foro de Discusión</h1>
+        <div class="container">
+            <div class="forum">
+                <h2>Discusiones</h2>
+                <ul id="discussions-list">
+                    <!-- Aquí se mostrarían las discusiones existentes -->
+                </ul>
+                <button id="new-discussion-btn">Nueva Discusión</button>
+            </div>
+            <div class="discussion">
+                <h2 id="discussion-title">Título de la Discusión</h2>
+                <p id="discussion-content">Contenido de la Discusión</p>
+                <div id="comments">
+                    <!-- Aquí se mostrarían los comentarios de la discusión seleccionada -->
+                </div>
+                <form id="comment-form">
+                    <textarea id="comment-input" placeholder="Escribe un comentario"></textarea>
+                    <button type="submit">Publicar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div id="cont-grupo-1">
+            <div class="box">
+
+                <a href="#">
+                    <img id="logo-footer" src="../static/img/logo.jpg" alt="logo">
+                </a>
+
+            </div>
+            <section id="cont-webjuegos">
+                <h2 class="titulo-footer">Comprar Juegos</h2>
+                <div>
+                    <ul>
+                        <li><a class="webs-juegos" href="https://epicgames.com/store" target="_blank">Epic Games</a></li>
+                        <li><a class="webs-juegos" href="https://store.steampowered.com/" target="_blank">Steam</a></li>
+                        <li><a class="webs-juegos" href="https://www.gog.com/" target="_blank">GOG (Good Old Games)</a></li>
+                        <li><a class="webs-juegos" href="https://steamcito.com.ar/" target="_blank">Steamsito</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="redes">
+                <h2 class="titulo-footer"> Redes sociales </h2>
+                <div id="cont-redes">
+                    <a class="hipervinc-red" href="https://facebook.com" target="_blank">
+                        <img class="img-red" src="../static/img/redes-sociales/facebook.png" alt="logo-faceboook">
+                    </a>
+                    <a class="hipervinc-red" href="https://www.instagram.com" target="_blank">
+                        <img class="img-red" src="../static/img/redes-sociales/instagram.png" alt="logo-instagram">
+                    </a>
+                    <a class="hipervinc-red" href="https://www.youtube.com" target="_blank">
+                        <img class="img-red" src="../static/img/redes-sociales/youtube.png" alt="logo-youtube">
+                    </a>
+                    <a class="hipervinc-red" href="https://www.twitch.tv/" target="_blank">
+                        <img class="img-red" src="../static/img/redes-sociales/twitch.png" alt="logo-twitch">
+                    </a>
+                </div>
+            </section>
+        </div>
+        <div id="cont-grupo-2">
+            <p id="derechos">&copy; 2024 <b>Ratón Gamer</b> - Todos los Derechos Reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
