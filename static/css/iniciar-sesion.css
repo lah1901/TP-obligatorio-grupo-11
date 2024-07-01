@@ -9,16 +9,16 @@ body{
 }
 
 @font-face {
-    font-family: "bebasNeue";
-    src: url('../../assets/fonts/BebasNeue-Regular/BebasNeue-Regular.ttf');
+    font-family: 'PoetsenOne-Regular';
+    src: url('/static/fonts/Poetsen-One/PoetsenOne-Regular.ttf') format('truetype');
+    /* O ajusta la ruta según tu estructura */
 }
 
 @font-face {
-    font-family: "poetsenOne";
-    src: url('../../assets/fonts/Poetsen-One/PoetsenOne-Regular.ttf');
-} 
-
-
+    font-family: 'BebasNeue-Regular';
+    src: url('/static/fonts/BebasNeue-Regular.ttf') format('truetype');
+    /* O ajusta la ruta según tu estructura */
+}
 
 
 

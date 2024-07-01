@@ -23,14 +23,18 @@
                 <a class="hipervinc-header" href="../index.html">Inicio</a>
                 <a class="hipervinc-header" href="trailers.html">Trailers</a>
                 <a class="hipervinc-header" href="reseñas.html">Reseñas</a>
-                <a class="hipervinc-header" href="foro.html">Foro</a>
-                <a class="hipervinc-header" href="iniciar-sesion.html">Iniciar sesión</a>
+                <a class="hipervinc-header" href="{{ url_for('registrarForm') }}">Registrarse</a>
+                <a class="hipervinc-header" href="{{ url_for('iniciar_sesion') }}">Iniciar sesión</a>
             </nav>
         </div>
 
     </header>
 
     <main>
+        <!-- {% if msg %}
+         <p class="msg">{{ msg }}</p>
+        {% endif %} -->
+
         <div id="cont-main">
 
             <div id="cont-formulario">
@@ -38,9 +42,9 @@
                 <div id="titulo">
                     <h1>Registrate gratis</h1>
                 </div>
-
+<!-- https://formspree.io/f/xqkrjedw -->
                 <div id="formulario">
-                    <form class="campos-form" action="https://formspree.io/f/xqkrjedw" method="post"
+                    <form class="campos-form" action="{{ url_for('registrarForm')}}" method="post"
                         enctype="multipart/form-data" target="_blank" onsubmit="return testearDatos()">
                         <div>
                             <label for="nombre">Nombre:</label>
