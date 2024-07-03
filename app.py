@@ -1,9 +1,9 @@
-from flask import Flask, request, jsonify, render_template, redirect, url_for
+from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-import os
-from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
+import os
 
 from config_BD import connectionBD
 
@@ -17,9 +17,13 @@ CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:@localhost:3306/usuariosgamers'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# Configuración de la clave secreta
+app.config['SECRET_KEY'] = os.urandom(24)
+
 db = SQLAlchemy(app)
 
 # Definición de tabla
+
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
@@ -112,44 +116,46 @@ def registrarForm():
             print(f"Error al registrar usuario: {str(e)}")
             # Redirigir al usuario de vuelta a la página de registro con mensaje de error
             return redirect(url_for('inicio')), 500
-
-
     return render_template('registrarse.html', msg='Método HTTP incorrecto')
-# Ruta para iniciar sesión
-@app.route('/iniciar-sesion', methods=['POST', 'GET'])
+    
+@app.route('/iniciar-sesion', methods=["GET", "POST"])
 def iniciar_sesion():
     if request.method == 'GET':
-        # Si es una solicitud GET, renderiza la plantilla de inicio de sesión
         return render_template('iniciar-sesion.html')
+
     elif request.method == 'POST':
         correo = request.form['correo']
         contraseña = request.form['contraseña']
 
-        # Validar las credenciales del usuario
-        usuario = Usuario.query.filter_by(correo=correo).first()
-        if usuario:
-            if check_password_hash(usuario.contraseña, contraseña):
-                # Contraseña válida, redirigir al dashboard o página principal del usuario
-                return redirect(url_for('dashboard', usuario_id=usuario.id))  # Redirigir al dashboard con ID de usuario
-            else:
-                error = 'Contraseña incorrecta. Inténtelo nuevamente.'
-                return render_template('iniciar-sesion.html', error=error)
-        else:
-            error = 'Usuario no encontrado. Verifique el correo electrónico.'
-            return render_template('iniciar-sesion.html', error=error)
-    else:
-        # Esto maneja cualquier otro método que no sea GET o POST, aunque en este caso no debería ocurrir
-        return abort(405)  # Devuelve un error 405 Método no permitido
+        # Verifica qué datos se están enviando desde el formulario
+        print(f"Correo ingresado: {correo}, Contraseña ingresada: {contraseña}")
 
-# Ruta para el dashboard
-@app.route('/dashboard/<int:usuario_id>')
-def dashboard(usuario_id):
-    # Obtener el usuario desde la base de datos
-    usuario = Usuario.query.get(usuario_id)
-    if usuario:
-        return render_template('hola.html', usuario=usuario)  # Pasar datos del usuario a 'hola.html'
+        # Busca el usuario en la base de datos usando SQLAlchemy
+        usuario = Usuario.query.filter_by(correo=correo).first()
+
+        # Verifica qué usuario se ha encontrado en la base de datos
+        print(f"Usuario encontrado: {usuario}")
+
+        # Comparación directa de contraseñas
+        if usuario and usuario.contraseña == contraseña:
+            session['logueado'] = True
+            # session['id'] = usuario.id  # Opcional: si necesitas el ID del usuario en la sesión
+            return render_template("admin.html")  # Redirige a la página de administrador
+        else:
+            # Usuario o contraseña incorrectas
+            return render_template("cerrar.html", mensaje="Usuario o contraseña incorrectas")
+
+    # Si el método HTTP no es GET ni POST, renderiza una página de error
+    return render_template('cerrar.html')
+
+
+@app.route('/admin')
+def admin():
+    if 'logueado' in session:
+        return render_template("admin.html")
     else:
-        return 'Usuario no encontrado', 404  # Manejar el caso donde el usuario no existe
+        return redirect(url_for("iniciar_sesion"))  # Redirige al inicio de sesión si no está logueado
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

@@ -39,7 +39,7 @@
                 </div>
 
                 <div id="formulario">
-                    <form class="campos-form" action="{{ url_for('iniciar_sesion') }}"method="post" target="_blank" onsubmit="return testearDatos()">
+                    <form class="campos-form" action="{{ url_for('iniciar_sesion') }}" method="post">
                         <div>
                             <label for="correo">Correo Electrónico:</label>
                             <input class="input-form" type="email" id="correo" name="correo" required>
@@ -50,12 +50,14 @@
                         </div>
                         <div id="errores"></div>
                         <div>
-                            <button id="iniciar-sesion" type="submit">INICIAR SESION</button>
+                            <button id="iniciar-sesion" type="submit">INICIAR SESIÓN</button>
                         </div>
                     </form>
                     <div id="imagen-form">
                         <img id="mario" src="../static/img/mariobros-iniciosesion.1.png" alt="">
                     </div>
+                </div>
+                
 
                 </div>
             </div>
