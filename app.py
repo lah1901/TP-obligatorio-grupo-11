@@ -5,8 +5,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 import os
 
-from config_BD import connectionBD
-
 app = Flask(__name__, template_folder='templates')
 app.config['UPLOAD_FOLDER'] = 'uploads/temp'  # Carpeta donde se guardarán temporalmente las imágenes
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}  # Extensiones de archivos permitidas
@@ -22,8 +20,7 @@ app.config['SECRET_KEY'] = os.urandom(24)
 
 db = SQLAlchemy(app)
 
-# Definición de tabla
-
+# Definición del modelo Usuario
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
@@ -34,31 +31,41 @@ class Usuario(db.Model):
     sexo = db.Column(db.String(10), nullable=False)
     pais = db.Column(db.String(50))
     imagen = db.Column(db.String(200))
-
-    def __init__(self, nombre, apellido, nombre_usuario, correo, contraseña, sexo, pais=None, imagen=None):
-        self.nombre = nombre
-        self.apellido = apellido
-        self.nombre_usuario = nombre_usuario
-        self.correo = correo
-        self.contraseña = contraseña
-        self.sexo = sexo
-        self.pais = pais
-        self.imagen = imagen
+    rol = db.Column(db.String(8), nullable=False, default='usuario')
 
     def __repr__(self):
         return f"<Usuario {self.nombre_usuario}>"
 
-
+# Crear todas las tablas definidas en los modelos
 with app.app_context():
     db.create_all()
 
+# Definición de rutas
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-@app.route("/")
-def inicio():
+@app.route('/registrarse')
+def registrarse():
     return render_template('registrarse.html')
 
+@app.route('/trailers')
+def trailers():
+    return render_template('trailers.html')
+
+@app.route('/reseñas')
+def reseñas():
+    return render_template('reseñas.html')
+
+@app.route('/foro')
+def foro():
+    return render_template('foro.html')
+
+# Función para verificar extensiones de archivos permitidas
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+
+
 
 @app.route('/form', methods=['GET', 'POST'])
 def registrarForm():
@@ -92,7 +99,8 @@ def registrarForm():
             contraseña=contraseña,
             sexo=sexo,
             pais=pais,
-            imagen=imagen
+            imagen=imagen,
+            rol='2'  # Asignar rol por defecto
         )
         
         try:
@@ -106,16 +114,16 @@ def registrarForm():
                 nuevo_usuario.imagen = imagen
                 db.session.commit()
             
-            # Mensaje de éxito
-            return redirect(url_for('inicio', msg='Usuario registrado con éxito'))
+            # Redirigir al usuario a la página de inicio después de registrarse
+            return redirect(url_for('index', msg='Usuario registrado con éxito'))
         
         except Exception as e:
             # Manejo de errores, por ejemplo, si falla la inserción en la base de datos
             db.session.rollback()
-            # Puedes imprimir el error para depuración
             print(f"Error al registrar usuario: {str(e)}")
-            # Redirigir al usuario de vuelta a la página de registro con mensaje de error
-            return redirect(url_for('inicio')), 500
+            return redirect(url_for('index')), 500
+    
+    # Renderizar la página de registro por defecto si el método no es POST
     return render_template('registrarse.html', msg='Método HTTP incorrecto')
     
 @app.route('/iniciar-sesion', methods=["GET", "POST"])
@@ -127,36 +135,29 @@ def iniciar_sesion():
         correo = request.form['correo']
         contraseña = request.form['contraseña']
 
-        # Verifica qué datos se están enviando desde el formulario
-        print(f"Correo ingresado: {correo}, Contraseña ingresada: {contraseña}")
-
-        # Busca el usuario en la base de datos usando SQLAlchemy
+        # Buscar el usuario en la base de datos usando SQLAlchemy
         usuario = Usuario.query.filter_by(correo=correo).first()
-
-        # Verifica qué usuario se ha encontrado en la base de datos
-        print(f"Usuario encontrado: {usuario}")
 
         # Comparación directa de contraseñas
         if usuario and usuario.contraseña == contraseña:
             session['logueado'] = True
-            # session['id'] = usuario.id  # Opcional: si necesitas el ID del usuario en la sesión
-            return render_template("admin.html")  # Redirige a la página de administrador
+            # Verificar el rol del usuario y redirigir según el rol
+            if usuario.rol == '2':
+                return render_template("usuarioRegistrado.html")
+            elif usuario.rol == '1':
+                return render_template("admin.html")
+            else:
+                return render_template("cerrar.html", mensaje="Rol de usuario no válido")
         else:
-            # Usuario o contraseña incorrectas
             return render_template("cerrar.html", mensaje="Usuario o contraseña incorrectas")
 
     # Si el método HTTP no es GET ni POST, renderiza una página de error
     return render_template('cerrar.html')
-
-
-@app.route('/admin')
-def admin():
-    if 'logueado' in session:
-        return render_template("admin.html")
-    else:
-        return redirect(url_for("iniciar_sesion"))  # Redirige al inicio de sesión si no está logueado
-
+@app.route('/cerrar-sesion')
+def cerrar_sesion():
+    # Limpiar la sesión al cerrar sesión
+    session.clear()
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
-    

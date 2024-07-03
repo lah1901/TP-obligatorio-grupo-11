@@ -22,10 +22,10 @@
 
             <nav id="menu-header">
                 <a class="hipervinc-header" href="../index.html">Inicio</a>
-                <a class="hipervinc-header" href="trailers.html">Trailers</a>
-                <a class="hipervinc-header" href="reseñas.html">Reseñas</a>
-                <a class="hipervinc-header" href="registrarse.html">Registrarse</a>
-                <a class="hipervinc-header" href="iniciar-sesion.html">Iniciar sesión</a>
+                <a class="hipervinc-header" href="{{ url_for('trailers') }}">Trailers</a>
+                <a class="hipervinc-header" href="{{ url_for('reseñas') }}">Reseñas</a>
+                <a class="hipervinc-header" href="{{ url_for('registrarForm') }}">Registrarse</a>
+                <a class="hipervinc-header" href="{{ url_for('iniciar_sesion') }}">Iniciar sesión</a>
             </nav>
         </div>
         

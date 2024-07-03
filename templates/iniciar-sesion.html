@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="../static/css/iniciar-sesion.css">
     <script src="https://kit.fontawesome.com/ce63497daf.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../static/img/icon-fontawesome.png" type="image/png">
+    <link rel="stylesheet" href="/static/css/perfil.css">
     <title>Iniciar sesión</title>
+    
 </head>
 
 <body>
@@ -19,17 +21,17 @@
             <p id="nombre-web">Ratón Gamer</p>
 
             <nav id="menu-header">
-                <a class="hipervinc-header" href="../index.html">Inicio</a>
-                <a class="hipervinc-header" href="trailers.html">Trailers</a>
-                <a class="hipervinc-header" href="reseñas.html">Reseñas</a>
-                <a class="hipervinc-header" href="foro.html">Foro</a>
+                <a class="hipervinc-header" href="{{ url_for('index') }}">Inicio</a>
+                <a class="hipervinc-header" href="{{ url_for('trailers') }}">Trailers</a>
+                <a class="hipervinc-header" href="{{ url_for('reseñas') }}">Reseñas</a>
+                <a class="hipervinc-header" href="{{ url_for('foro') }}">Foro</a>
                 <a class="hipervinc-header" href="{{ url_for('registrarForm') }}">Registrarse</a>
             </nav>
         </div>
-
     </header>
 
     <main>
+       
         <div id="cont-main">
 
             <div id="cont-formulario">
