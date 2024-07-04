@@ -1,0 +1,134 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    
+}
+
+:root {
+    --color-turquesa:#186CC3;
+    --color-celesteclaro: #52B5F2;
+    --color-rosa: #d966ba;
+     
+}
+
+.container{
+    /* background: radial-gradient(circle, #ffcccc, #ff9999); */
+    background: radial-gradient(circle, #fab8e8, #d966ba);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+table {
+    /* background-color: #001F3F; */
+    background-color: var(--color-turquesa);
+    border-collapse: collapse;
+    width: 60vw;
+    max-width: 60vw;
+    margin: 2vw auto;
+    font-family: Arial, sans-serif;
+    height:auto;
+    
+  }
+
+th, td {
+    border: 0.1vw solid #dddddd;
+    padding: 0.8vw;
+    text-align: left;
+    color: #dddddd;
+    
+  }
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: var(--color-turquesa);
+}
+
+a{
+    text-decoration: none;
+    color: #dddddd;
+}
+
+td:hover{
+    background-color: #f2f2f2;
+    color:var(--color-turquesa)
+}
+
+a:hover{
+    background-color: #f2f2f2;
+    color:var(--color-turquesa)
+}
+
+.menu{
+    text-decoration: none;
+    background-color: var(--color-turquesa);
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2vw;
+
+}
+
+button{
+    
+    margin-right: 2vh;
+    background-color: red; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 0.5vw 3vh; /* Relleno interno */
+    border: none; /* Quita el borde */
+    border-radius: 2vw; /* Borde redondeado */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* Quita el subrayado predeterminado */
+    display: inline-block; /* Mostrar como bloque en línea */
+    font-size: 1vw; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    
+}
+
+.boton{
+    
+    color: #f2f2f2;
+    margin-right: 2vh;
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 0.5vw 3vh; /* Relleno interno */
+    border: none; /* Quita el borde */
+    border-radius: 2vw; /* Borde redondeado */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* Quita el subrayado predeterminado */
+    display: inline-block; /* Mostrar como bloque en línea */
+    font-size: 1vw; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+}
+
+.nuevo{
+    color: #f2f2f2;
+    margin-right: 2vh;
+    background-color: #001F3F50; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 0.5vw 3vh; /* Relleno interno */
+    border: none; /* Quita el borde */
+    border-radius: 2vw; /* Borde redondeado */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* Quita el subrayado predeterminado */
+    display: inline-block; /* Mostrar como bloque en línea */
+    font-size: 1vw; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+}
+
+
+img{
+    width: 6vw;
+    height: 10vh;
+}
+
+
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tabla_usuarios.css') }}">
+    <title>Document</title>
+</head>
+<body>
+
+    <header id="header"></header>
+    <main>
+        
+        <section class="container">
+            <div id="app">
+
+                <!-- Botón Nuevo -->
+                <a class="nuevo" href="{{ url_for('static', filename='templates/ingresar_usuario.html') }}">Nuevo</a>
+
+                <section id="error" style="display: none;">Lo sentimos se produjo un error</section>
+                <section id="content">
+                    <section id="cargando" style="display: none;">
+                        <p>Cargando .....</p>
+                    </section>
+
+                    <section id="usuarios_table">
+                        <div>
+                            <table class="tabla">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Nombre de Usuario</th>
+                                        <th>Correo Electrónico</th>
+                                        <th>Contraseña</th>
+                                        <th>Sexo</th>
+                                        <th>País</th>
+                                        <th>Imagen</th>
+                                        <th>Rol</th>
+                                        <th>Acciones</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for usuario in usuarios %}
+                                    <tr>
+                                        <td>{{ usuario.id }}</td>
+                                        <td>{{ usuario.nombre }}</td>
+                                        <td>{{ usuario.apellido }}</td>
+                                        <td>{{ usuario.nombre_usuario }}</td>
+                                        <td>{{ usuario.correo }}</td>
+                                        <td>{{ usuario.contraseña }}</td>
+                                        <td>{{ usuario.sexo }}</td>
+                                        <td>{{ usuario.pais }}</td>
+                                        <td>
+                                            <img src="{{ usuario.imagen }}" alt="">
+                                        </td>
+                                        <td>{{ usuario.rol }}</td>
+                                        <td>
+                                            <button type="button" onclick="eliminar('{{ usuario.id }}')">Eliminar</button>
+                                        </td>
+                                        <td>
+                                            <a class="boton" href="{{ url_for('editar_usuario', id=usuario.id) }}">Editar</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </section>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer></footer>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="{{ url_for('static', filename='js/tabla_usuarios.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/header.js') }}"></script>
+    <script>
+        function eliminar(id) {
+            fetch(`/borrar/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('error').style.display = 'block';
+                } else {
+                    alert('Usuario eliminado correctamente');
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('error').style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>

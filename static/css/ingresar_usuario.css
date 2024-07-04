@@ -1,0 +1,191 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+
+:root {
+    --color-turquesa:#186CC3;
+    --color-celesteclaro: #52B5F2;
+    --color-rosa: #d966ba;
+     
+}
+
+.container-form{
+    /* background: radial-gradient(circle, #ffcccc, #ff9999); */
+    background: radial-gradient(circle, #fab8e8, #d966ba);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form{
+    /* background-color: #001F3F; */
+    background-color:var(--color-turquesa);
+    width: 30vw;
+    height: 50vh;
+    border-radius: 3vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.entrada{
+    margin-bottom: 2vh;
+}
+
+label{
+    font-size: 2vw;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: aliceblue;
+}
+
+button {
+    padding: 0.2vw 0.3vh;
+    font-size: 1.6vw;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    /* background-color: #ff9999; */
+    background-color: var(--color-rosa);
+    color: #ffffff;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #ff6666;
+}
+
+.modificar{
+    color: #f2f2f2;
+    margin-right: 2vh;
+    background-color: #ff9999; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 0.5vw 3vh; /* Relleno interno */
+    border: none; /* Quita el borde */
+    border-radius: 2vw; /* Borde redondeado */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* Quita el subrayado predeterminado */
+    display: inline-block; /* Mostrar como bloque en línea */
+    font-size: 1vw; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+}
+
+@media screen and (max-width:768px){
+    form{
+        background-color: #001F3F;
+        width: 50vw;
+        height: 50vh;
+        border-radius: 3vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    label{
+        font-size: 4vw;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: aliceblue;
+    }
+
+    a{
+        font-size: 4vw;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        text-decoration: none;
+        color: aliceblue;
+        
+    }
+
+    .modificar{
+        color: #f2f2f2;
+        margin-right: 2vh;
+        background-color: #ff9999; /* Color de fondo */
+        color: white; /* Color del texto */
+        padding: 0.5vw 3vh; /* Relleno interno */
+        border: none; /* Quita el borde */
+        border-radius: 2vw; /* Borde redondeado */
+        text-align: center; /* Alineación del texto */
+        text-decoration: none; /* Quita el subrayado predeterminado */
+        display: inline-block; /* Mostrar como bloque en línea */
+        font-size: 3vw; /* Tamaño de fuente */
+        cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    }
+}
+
+@media screen and (max-width:425px){
+    form{
+        background-color: #001F3F;
+        width: 80vw;
+        height: 40vh;
+        border-radius: 3vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    label{
+        font-size: 6vw;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: aliceblue;
+    }
+
+    a{
+        font-size: 6vw;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        text-decoration: none;
+        color: aliceblue;
+        
+    }
+
+    .modificar{
+        color: #f2f2f2;
+        margin-right: 2vh;
+        background-color: #ff9999; /* Color de fondo */
+        color: white; /* Color del texto */
+        padding: 0.5vw 3vh; /* Relleno interno */
+        border: none; /* Quita el borde */
+        border-radius: 2vw; /* Borde redondeado */
+        text-align: center; /* Alineación del texto */
+        text-decoration: none; /* Quita el subrayado predeterminado */
+        display: inline-block; /* Mostrar como bloque en línea */
+        font-size: 5vw; /* Tamaño de fuente */
+        cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    }
+}
+
+
+@media screen and (max-width:320px){
+    form{
+        background-color: #001F3F;
+        width: 80vw;
+        height: 50vh;
+        border-radius: 3vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    label{
+        font-size: 6vw;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: aliceblue;
+    }
+
+    a{
+        font-size: 6vw;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        text-decoration: none;
+        color: aliceblue;
+        
+    }
+}
+
+

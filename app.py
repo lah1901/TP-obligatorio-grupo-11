@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
+from sqlalchemy.exc import IntegrityError
 import os
 
 app = Flask(__name__, template_folder='templates')
@@ -60,6 +61,40 @@ def reseñas():
 @app.route('/foro')
 def foro():
     return render_template('foro.html')
+
+@app.route('/tabla_usuarios.html')
+def tabla_usuarios():
+    # Lógica para obtener y renderizar la tabla de usuarios
+    return render_template('tabla_usuarios.html')
+
+
+
+@app.route('/editar_usuario/<int:id>', methods=['GET', 'POST'])
+def editar_usuario(id):
+    usuario = Usuario.query.get_or_404(id)
+
+    if request.method == 'POST':
+        usuario.nombre = request.form['nombre']
+        usuario.apellido = request.form['apellido']
+        # Agrega aquí el resto de campos que deseas actualizar
+        db.session.commit()
+        return redirect(url_for('index'))
+
+    return render_template('editar_usuario.html', usuario=usuario)
+
+# Ruta alternativa para edición de usuario, renombrada
+@app.route('/editar_usuario_info/<int:id>', methods=['GET', 'POST'])
+def editar_usuario_info(id):
+    usuario = Usuario.query.get_or_404(id)
+
+    if request.method == 'POST':
+        usuario.nombre = request.form['nombre']
+        usuario.apellido = request.form['apellido']
+        # Agrega aquí el resto de campos que deseas actualizar
+        db.session.commit()
+        return redirect(url_for('index'))
+
+    return render_template('editar_usuario.html', usuario=usuario)
 
 # Función para verificar extensiones de archivos permitidas
 def allowed_file(filename):
@@ -145,7 +180,8 @@ def iniciar_sesion():
             if usuario.rol == '2':
                 return render_template("usuarioRegistrado.html")
             elif usuario.rol == '1':
-                return render_template("admin.html")
+                usuarios = Usuario.query.all()
+                return render_template("tabla_usuarios.html", usuarios=usuarios)
             else:
                 return render_template("cerrar.html", mensaje="Rol de usuario no válido")
         else:
@@ -153,11 +189,68 @@ def iniciar_sesion():
 
     # Si el método HTTP no es GET ni POST, renderiza una página de error
     return render_template('cerrar.html')
+
 @app.route('/cerrar-sesion')
 def cerrar_sesion():
     # Limpiar la sesión al cerrar sesión
     session.clear()
     return redirect(url_for('index'))
+    # Modificar un registro
+
+@app.route('/update/<int:id>', methods=['POST'])
+def update(id):
+    usuario = Usuario.query.get(id)
+    if not usuario:
+        return jsonify({"error": "Usuario no encontrado"}), 404
+
+    if request.form.get('_method') == 'PUT':
+        try:
+            usuario.nombre = request.form.get('nombre', usuario.nombre)
+            usuario.apellido = request.form.get('apellido', usuario.apellido)
+            usuario.nombre_usuario = request.form.get('nombreUsuario', usuario.nombre_usuario)
+            usuario.correo = request.form.get('correo', usuario.correo)
+            usuario.contraseña = request.form.get('contraseña', usuario.contraseña)
+            usuario.sexo = request.form.get('sexo', usuario.sexo)
+            usuario.pais = request.form.get('pais', usuario.pais)
+            usuario.imagen = request.form.get('img-usuario', usuario.imagen)
+
+            db.session.commit()
+
+            return jsonify({
+                "mensaje": "Usuario actualizado correctamente",
+                "id": usuario.id,
+                "nombre": usuario.nombre,
+                "apellido": usuario.apellido,
+                "nombre_usuario": usuario.nombre_usuario,
+                "correo": usuario.correo,
+                "contraseña": usuario.contraseña,
+                "sexo": usuario.sexo,
+                "pais": usuario.pais,
+                "imagen": usuario.imagen
+            })
+
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error al actualizar usuario: {str(e)}")
+            return jsonify({"error": "Error al actualizar usuario"}), 500
+
+    return jsonify({"error": "Método no permitido"}), 405
+
+
+@app.route('/borrar/<int:id>', methods=['DELETE'])
+def borrar(id):
+    usuario = Usuario.query.get(id)
+    if not usuario:
+        return jsonify({"error": "Usuario no encontrado"}), 404
+
+    db.session.delete(usuario)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Usuario eliminado correctamente",
+        "id": usuario.id
+    })
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
