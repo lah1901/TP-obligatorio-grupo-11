@@ -54,10 +54,12 @@
                                         <td>{{ usuario.contraseña }}</td>
                                         <td>{{ usuario.sexo }}</td>
                                         <td>{{ usuario.pais }}</td>
-                                        <td>
-                                            <img src="{{ usuario.imagen }}" alt="">
+                                         <!-- Ejemplo de cómo debería verse la parte relevante de tu plantilla HTML -->
+                                         <td>
+                                            <img src="{{ url_for('static', filename='temp/' ~ usuario.imagen) }}" alt="Imagen de {{ usuario.nombre }}" width="100" height="100">
                                         </td>
-                                        <td>{{ usuario.rol }}</td>
+                                                                             
+                                         <td>{{ usuario.rol }}</td>
                                         <td>
                                             <button type="button" onclick="eliminar('{{ usuario.id }}')">Eliminar</button>
                                         </td>

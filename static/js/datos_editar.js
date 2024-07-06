@@ -22,6 +22,8 @@ for (const [nombre, valor] of datos) {
     resultado[sexo] = valor;
     resultado[pais] = valor;
     resultado[imagen] = valor
+    resultado[rol]= valor
+
 }
 
 // Imprimir el resultado
@@ -38,3 +40,4 @@ document.getElementById("contraseña").value = resultado["contraseña"]
 document.getElementById("sexo").value = resultado["sexo"]
 document.getElementById("pais").value = resultado["pais"]
 document.getElementById("imagen").value = resultado["imagen"]
+document.getElementById("rol").value = resultado["rol"]

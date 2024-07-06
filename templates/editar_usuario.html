@@ -13,7 +13,6 @@
         <div id="cont-main">
             <div id="cont-formulario">
                 <div id="titulo">
-                    <h1>Actualizar Datos</h1>
                     <h2>Datos Actuales:</h2>
                     <table>
                         <tr>
@@ -29,6 +28,7 @@
                         </tr>
                     </table>
                 </div>
+                <h1>Actualizar Datos</h1>
                 <form action="{{ url_for('editar_usuario', id=usuario.id) }}" method="POST">
                     <div>
                         <label for="id">ID</label>
@@ -51,8 +51,8 @@
                     </div>
     
                     <div class="entrada">
-                        <label for="correo_electronico">Correo electrónico:</label>
-                        <input type="email" name="correo_electronico" id="correo_electronico" value="{{ usuario.correo }}">
+                        <label for="correo">Correo electrónico:</label>
+                        <input type="email" name="correo" id="correo" value="{{ usuario.correo }}">
                     </div>
     
                     <div class="entrada">
@@ -73,6 +73,11 @@
                     <div class="entrada">
                         <label for="imagen">Imagen:</label>
                         <input type="text" name="imagen" id="imagen" value="{{ usuario.imagen }}">
+                    </div>
+
+                    <div>
+                        <label for="rol">Rol de usuario (Ingrear 1- USUARIO 2- ADMINISTRADOR):</label>
+                        <input class="input-form" type="rol" id="rol" name="rol" value="{{ usuario.rol }}">
                     </div>
     
                     <button class="modificar" type="button" onclick="modificar()">MODIFICAR</button>
@@ -96,4 +101,3 @@
     <script src="{{ url_for('static', filename='js/datos_editar.js') }}"></script>
 </body>
 </html>
-
