@@ -62,44 +62,59 @@ def reseñas():
 def foro():
     return render_template('foro.html')
 
-@app.route('/tabla_usuarios.html')
+@app.route('/tabla_usuarios')
 def tabla_usuarios():
-    # Lógica para obtener y renderizar la tabla de usuarios
-    return render_template('tabla_usuarios.html')
+    usuarios = Usuario.query.all()
+    return render_template('tabla_usuarios.html', usuarios=usuarios)
 
+@app.route('/ingresar_usuario')
+def ingresar_usuario():
+    return render_template('ingresar_usuario.html')
 
-
-@app.route('/editar_usuario/<int:id>', methods=['GET', 'POST'])
-def editar_usuario(id):
-    usuario = Usuario.query.get_or_404(id)
-
-    if request.method == 'POST':
-        usuario.nombre = request.form['nombre']
-        usuario.apellido = request.form['apellido']
-        # Agrega aquí el resto de campos que deseas actualizar
-        db.session.commit()
-        return redirect(url_for('index'))
-
-    return render_template('editar_usuario.html', usuario=usuario)
-
-# Ruta alternativa para edición de usuario, renombrada
-@app.route('/editar_usuario_info/<int:id>', methods=['GET', 'POST'])
-def editar_usuario_info(id):
-    usuario = Usuario.query.get_or_404(id)
-
-    if request.method == 'POST':
-        usuario.nombre = request.form['nombre']
-        usuario.apellido = request.form['apellido']
-        # Agrega aquí el resto de campos que deseas actualizar
-        db.session.commit()
-        return redirect(url_for('index'))
-
-    return render_template('editar_usuario.html', usuario=usuario)
+@app.route('/links')
+def links():
+    return render_template('links.html')
 
 # Función para verificar extensiones de archivos permitidas
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
+# Retornar todos los registros en un Json
+@app.route("/usuarios",  methods=['GET'])
+def usuarios():
+    # Consultar en la tabla todos los usuarios
+    # all_registros -> lista de objetos
+    all_registros = Usuario.query.all()
+
+    # Lista de diccionarios
+    data_serializada = []
+    
+    for objeto in all_registros:
+        data_serializada.append({"id":objeto.id, "nombre":objeto.nombre, "apellido":objeto.apellido, "nombre_usuario":objeto.nombre_usuario, "correo":objeto.correo, "contraseña":objeto.contraseña, "sexo":objeto.sexo, "pais":objeto.pais, "imagen":objeto.imagen})
+
+@app.route('/editar_usuario/<int:id>', methods=['GET', 'POST'])
+def editar_usuario(id):
+    # Lógica para obtener y editar el usuario con el ID especificado
+    usuario = Usuario.query.get_or_404(id)
+    
+    if request.method == 'POST':
+        # Actualizar el usuario con los datos recibidos del formulario o JSON
+        usuario.nombre = request.json.get('nombre', usuario.nombre)
+        usuario.apellido = request.json.get('apellido', usuario.apellido)
+        usuario.nombre_usuario = request.json.get('nombre_usuario', usuario.nombre_usuario)
+        usuario.correo = request.json.get('correo', usuario.correo)
+        usuario.contraseña = request.json.get('contraseña', usuario.contraseña)
+        usuario.sexo = request.json.get('sexo', usuario.sexo)
+        usuario.pais = request.json.get('pais', usuario.pais)
+        usuario.imagen = request.json.get('imagen', usuario.imagen)
+
+        db.session.commit()
+        
+        # Redirigir a la página de tabla de usuarios o a donde sea necesario después de editar
+        return redirect(url_for('tabla_usuarios'))
+
+    # Renderizar el formulario de edición con los datos del usuario
+    return render_template('editar_usuario.html', usuario=usuario)
 
 
 @app.route('/form', methods=['GET', 'POST'])
@@ -160,7 +175,7 @@ def registrarForm():
     
     # Renderizar la página de registro por defecto si el método no es POST
     return render_template('registrarse.html', msg='Método HTTP incorrecto')
-    
+
 @app.route('/iniciar-sesion', methods=["GET", "POST"])
 def iniciar_sesion():
     if request.method == 'GET':
@@ -174,83 +189,61 @@ def iniciar_sesion():
         usuario = Usuario.query.filter_by(correo=correo).first()
 
         # Comparación directa de contraseñas
-        if usuario and usuario.contraseña == contraseña:
-            session['logueado'] = True
-            # Verificar el rol del usuario y redirigir según el rol
-            if usuario.rol == '2':
-                return render_template("usuarioRegistrado.html")
-            elif usuario.rol == '1':
-                usuarios = Usuario.query.all()
-                return render_template("tabla_usuarios.html", usuarios=usuarios)
+        if usuario:
+            if usuario.contraseña == contraseña:
+                session['logueado'] = True
+                # Verificar el rol del usuario y redirigir según el rol
+                if usuario.rol == '2':
+                    return render_template("usuarioRegistrado.html")
+                elif usuario.rol == '1':
+                    # Redirigir a la página de tabla de usuarios
+                    return redirect(url_for('tabla_usuarios'))
+                else:
+                    return render_template("cerrar.html", mensaje="Rol de usuario no válido o indefinido")
             else:
-                return render_template("cerrar.html", mensaje="Rol de usuario no válido")
+                return render_template("cerrar.html", mensaje="Contraseña incorrecta")
         else:
-            return render_template("cerrar.html", mensaje="Usuario o contraseña incorrectas")
+            return render_template("cerrar.html", mensaje="Usuario no encontrado")
 
-    # Si el método HTTP no es GET ni POST, renderiza una página de error
-    return render_template('cerrar.html')
 
 @app.route('/cerrar-sesion')
 def cerrar_sesion():
     # Limpiar la sesión al cerrar sesión
     session.clear()
     return redirect(url_for('index'))
-    # Modificar un registro
 
-@app.route('/update/<int:id>', methods=['POST'])
-def update(id):
-    usuario = Usuario.query.get(id)
-    if not usuario:
-        return jsonify({"error": "Usuario no encontrado"}), 404
-
-    if request.form.get('_method') == 'PUT':
-        try:
-            usuario.nombre = request.form.get('nombre', usuario.nombre)
-            usuario.apellido = request.form.get('apellido', usuario.apellido)
-            usuario.nombre_usuario = request.form.get('nombreUsuario', usuario.nombre_usuario)
-            usuario.correo = request.form.get('correo', usuario.correo)
-            usuario.contraseña = request.form.get('contraseña', usuario.contraseña)
-            usuario.sexo = request.form.get('sexo', usuario.sexo)
-            usuario.pais = request.form.get('pais', usuario.pais)
-            usuario.imagen = request.form.get('img-usuario', usuario.imagen)
-
-            db.session.commit()
-
-            return jsonify({
-                "mensaje": "Usuario actualizado correctamente",
-                "id": usuario.id,
-                "nombre": usuario.nombre,
-                "apellido": usuario.apellido,
-                "nombre_usuario": usuario.nombre_usuario,
-                "correo": usuario.correo,
-                "contraseña": usuario.contraseña,
-                "sexo": usuario.sexo,
-                "pais": usuario.pais,
-                "imagen": usuario.imagen
-            })
-
-        except Exception as e:
-            db.session.rollback()
-            print(f"Error al actualizar usuario: {str(e)}")
-            return jsonify({"error": "Error al actualizar usuario"}), 500
-
-    return jsonify({"error": "Método no permitido"}), 405
-
-
-@app.route('/borrar/<int:id>', methods=['DELETE'])
+@app.route('/borrar/<id>', methods=['DELETE'])
 def borrar(id):
+    
+    # Se busca a la usuarios por id en la DB
     usuario = Usuario.query.get(id)
-    if not usuario:
-        return jsonify({"error": "Usuario no encontrado"}), 404
 
+    # Se elimina de la DB
     db.session.delete(usuario)
     db.session.commit()
 
-    return jsonify({
-        "message": "Usuario eliminado correctamente",
-        "id": usuario.id
-    })
+    data_serializada = [{"id":usuario.id, "nombre":usuario.nombre, "apellido":usuario.apellido, "nombre_usuario":usuario.nombre_usuario, "correo":usuario.correo, "contraseña":usuario.contraseña, "sexo":usuario.sexo, "pais":usuario.pais, "imagen":usuario.imagen}]
 
+    return jsonify(data_serializada)
+
+# Crear un registro en la tabla Usuarios
+@app.route("/registro", methods=['POST']) 
+def registro():
+    # {"nombre": "Felipe", ...} -> input tiene el atributo name="nombre"
+    nombre_recibido = request.json["nombre"]
+    apellido=request.json['apellido']
+    nombre_usuario=request.json['nombre_usuario']
+    correo=request.json['correo']
+    contraseña=request.json['contraseña']
+    sexo=request.json['sexo']
+    pais=request.json['pais']
+    imagen=request.json['imagen']
+
+    nuevo_registro = Usuario(nombre=nombre_recibido,apellido=apellido,nombre_usuario=nombre_usuario,correo=correo, contraseña=contraseña, sexo=sexo, pais=pais,imagen=imagen)
+    db.session.add(nuevo_registro)
+    db.session.commit()
+
+    return "Solicitud de post recibida"
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

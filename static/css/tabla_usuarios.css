@@ -1,19 +1,97 @@
 *{
-    margin: 0%;
-    padding: 0%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+}
+
+@font-face {
+    font-family: "bebasNeue";
+    src: url('../../assets/fonts/BebasNeue-Regular/BebasNeue-Regular.ttf');
+}
+
+@font-face {
+    font-family: "poetsenOne";
+    src: url('../../assets/fonts/Poetsen-One/PoetsenOne-Regular.ttf');
+}
+
+@font-face {
+    font-family: "dancingScript";
+    src: url('../../assets/fonts/Dancing-Script/DancingScript-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: "yantramanav";
+    src: url('../../assets/fonts/Yantramanav/Yantramanav-Black.ttf');
+}
+
+
+
+
+
+/*::::: Encabezado :::::*/
+#header {
+    background-color: #0a1a2a;
+    width: 100%;
+    height: 25vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+ }
+
+#logo-header{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #D966ba;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#nombre-web {
+    font-family: "poetsenOne";
+    color: #d966ba;
+    font-size: 40px;
+    margin-right: 190px;
     
 }
 
-:root {
-    --color-turquesa:#186CC3;
-    --color-celesteclaro: #52B5F2;
-    --color-rosa: #d966ba;
-     
+#app-admin{
+     font-family: "dancingScript";
+     color:#52B5F2;
+     font-size: 60px;
+     margin-right: 180px;
 }
 
+a:hover{
+    color: rgb(215, 102, 185);
+}
+
+.menu {
+    text-decoration: none;
+    border: 2px solid rgba(215, 102, 185, 0.45);
+    text-align: center;
+    width: 110px;
+    height: 60px;
+    background-color: rgba(146, 158, 170, 0.7);
+    margin-left: 100px;
+    padding: 10px;
+    font-family: "poetsenOne";
+    font-size:16px;
+    color: white;
+    transition: color 0.3s;
+}
+
+
+
+
+
+/*::::: Main :::::*/
 .container{
-    /* background: radial-gradient(circle, #ffcccc, #ff9999); */
-    background: radial-gradient(circle, #fab8e8, #d966ba);
+    background:  #05070d;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -22,15 +100,38 @@
     
 }
 
+#titulo{
+    color:#52B5F2;
+    font-family: "bebasNeue";
+    font-size: 45px;
+    margin-top: 50px;
+
+}
+
+#añadir{
+    color:#52B5F2;
+    font-family: "yantramanav";
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+#cont-bt-registrar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 60px;
+}
 
 table {
-    /* background-color: #001F3F; */
-    background-color: var(--color-turquesa);
+    
+    
     border-collapse: collapse;
     width: 60vw;
     max-width: 60vw;
     margin: 2vw auto;
-    font-family: Arial, sans-serif;
+    font-family: "yantramanav";
+    
+    font-size: 18px;
     height:auto;
     
   }
@@ -46,7 +147,8 @@ th, td {
 th {
     background-color: #f2f2f2;
     font-weight: bold;
-    color: var(--color-turquesa);
+    color: #52B5F2;
+    text-align: center;
 }
 
 a{
@@ -59,23 +161,7 @@ td:hover{
     color:var(--color-turquesa)
 }
 
-a:hover{
-    background-color: #f2f2f2;
-    color:var(--color-turquesa)
-}
 
-.menu{
-    text-decoration: none;
-    background-color: var(--color-turquesa);
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2vw;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 2vw;
-
-}
 
 button{
     
@@ -97,7 +183,7 @@ button{
     
     color: #f2f2f2;
     margin-right: 2vh;
-    background-color: #4CAF50; /* Color de fondo */
+    background-color: #ddeb18; /* Color de fondo */
     color: white; /* Color del texto */
     padding: 0.5vw 3vh; /* Relleno interno */
     border: none; /* Quita el borde */
@@ -112,7 +198,7 @@ button{
 .nuevo{
     color: #f2f2f2;
     margin-right: 2vh;
-    background-color: #001F3F50; /* Color de fondo */
+    background-color: #4CAF50; /* Color de fondo */
     color: white; /* Color del texto */
     padding: 0.5vw 3vh; /* Relleno interno */
     border: none; /* Quita el borde */

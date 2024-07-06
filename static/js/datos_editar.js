@@ -17,7 +17,7 @@ for (const [nombre, valor] of datos) {
     resultado[nombre] = valor;
     resultado[apellido] = valor;
     resultado[nombre_usuario] = valor;
-    resultado[correo_electronico] = valor;
+    resultado[correo] = valor;
     resultado[contraseña] = valor;
     resultado[sexo] = valor;
     resultado[pais] = valor;
@@ -33,7 +33,7 @@ document.getElementById("id").value = resultado["id"]
 document.getElementById("nombre").value = resultado["nombre"]
 document.getElementById("apellido").value = resultado["apellido"]
 document.getElementById("nombre_usuario").value = resultado["nombre_usuario"]
-document.getElementById("correo_electronico").value = resultado["correo_electronico"]
+document.getElementById("correo").value = resultado["correo"]
 document.getElementById("contraseña").value = resultado["contraseña"]
 document.getElementById("sexo").value = resultado["sexo"]
 document.getElementById("pais").value = resultado["pais"]

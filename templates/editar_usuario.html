@@ -3,153 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/ingresar_usuario.css">
-    <link rel="stylesheet" href="/static/css/tabla_usuarios.css"> 
-    <!-- <link rel="stylesheet" href="/static/css/registrarse.css"> -->
-    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editar_usuario.css') }}">
+    <title>App Admin - Editar</title>
 </head>
 <body>
-    <header id="header"></header>
+    <header></header>
+    
     <main>
         <div id="cont-main">
-
             <div id="cont-formulario">
-             <div id="titulo">
+                <div id="titulo">
                     <h1>Actualizar Datos</h1>
-                    <thead>
-                        <h2>Datos Actuales: </h2>
+                    <h2>Datos Actuales:</h2>
+                    <table>
                         <tr>
-                            <td>ID:{{ usuario.id}}|</td>
-                            <br>
-                            <td>Nombre:{{ usuario.nombre }}|</td>
-                            <br>
-                            <td>Apellido:{{ usuario.apellido }}|</td>
-                            <br>
-                            <td>Nombre de usuario: {{ usuario.nombre_usuario }}|</td>
-                            <br>
-                            <td>Correo: {{ usuario.correo }}|</td>
-                            <br>
-                            <td>Contraseña: {{ usuario.contraseña }}|</td>
-                            <br>
-                            <td>Sexo: {{ usuario.sexo }}|</td>
-                            <br>
-                            <td>Pais: {{ usuario.pais }}|</td>
-                            <br>
-                            <td>
-                               Imagen de Usuario: <img src="{{ usuario.imagen }}" alt="imagenUsuario">|
-                            </td>
+                            <td>ID: {{ usuario.id }}</td>
+                            <td>Nombre: {{ usuario.nombre }}</td>
+                            <td>Apellido: {{ usuario.apellido }}</td>
+                            <td>Nombre de usuario: {{ usuario.nombre_usuario }}</td>
+                            <td>Correo: {{ usuario.correo }}</td>
+                            <td>Contraseña: {{ usuario.contraseña }}</td>
+                            <td>Sexo: {{ usuario.sexo }}</td>
+                            <td>País: {{ usuario.pais }}</td>
+                            <td>Imagen de Usuario: <img src="{{ usuario.imagen }}" alt="imagenUsuario"></td>
                         </tr>
-          
+                    </table>
+                </div>
+                <form action="{{ url_for('editar_usuario', id=usuario.id) }}" method="POST">
+                    <div>
+                        <label for="id">ID</label>
+                        <input type="number" name="id" id="id" value="{{ usuario.id }}" disabled>
+                    </div>
+    
+                    <div>
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" id="nombre" value="{{ usuario.nombre }}">
+                    </div>
+    
+                    <div class="entrada">
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" name="apellido" id="apellido" value="{{ usuario.apellido }}">
+                    </div>
+    
+                    <div class="entrada">
+                        <label for="nombre_usuario">Nombre de usuario:</label>
+                        <input type="text" name="nombre_usuario" id="nombre_usuario" value="{{ usuario.nombre_usuario }}">
+                    </div>
+    
+                    <div class="entrada">
+                        <label for="correo_electronico">Correo electrónico:</label>
+                        <input type="email" name="correo_electronico" id="correo_electronico" value="{{ usuario.correo }}">
+                    </div>
+    
+                    <div class="entrada">
+                        <label for="contraseña">Contraseña:</label>
+                        <input type="password" name="contraseña" id="contraseña" value="{{ usuario.contraseña }}">
+                    </div>
+    
+                    <div class="entrada">
+                        <label for="sexo">Sexo:</label>
+                        <input type="text" name="sexo" id="sexo" value="{{ usuario.sexo }}">
+                    </div>
+    
+                    <div class="entrada">
+                        <label for="pais">País:</label>
+                        <input type="text" name="pais" id="pais" value="{{ usuario.pais }}">
+                    </div>
+    
+                    <div class="entrada">
+                        <label for="imagen">Imagen:</label>
+                        <input type="text" name="imagen" id="imagen" value="{{ usuario.imagen }}">
+                    </div>
+    
+                    <button class="modificar" type="button" onclick="modificar()">MODIFICAR</button>
+                </form>
+    
+                <br>
+                <a href="{{ url_for('tabla_usuarios') }}" style="color: black;">Volver a Tabla de Usuarios</a>
             </div>
-            <br><br><br><br>
-            <form class="formulario" action="/update/{{ usuario.id }}" method="post" onsubmit="enviarFormulario(event)">
-                <input type="hidden" name="_method" value="PUT"> <!-- Campo oculto para indicar PUT -->
-    <div>
-        <label for="nombre">Nombre:</label>
-        <input class="input-form" type="text" id="nombre" name="nombre" required>
-    </div>
-    <div>
-        <label for="apellido">Apellido:</label>
-        <input class="input-form" type="text" id="apellido" name="apellido" required>
-    </div>
-    <div>
-        <label for="nombreUsuario">Nombre de usuario:</label>
-        <input class="input-form" type="text" id="nombreUsuario" name="nombreUsuario">
-    </div>
-    <div>
-        <label for="correo">Correo Electrónico:</label>
-        <input class="input-form" type="email" id="correo" name="correo" required>
-    </div>
-    <div>
-        <label for="contraseña">Contraseña:</label>
-        <input class="input-form" type="password" id="contraseña" name="contraseña" required>
-    </div>
-    <br>
-    <div id="radio-button">
-        <p>Sexo:</p>
-        <div>
-            <input type="radio" id="hombre" name="sexo" value="Hombre" checked>
-            <label for="hombre">Hombre</label>
         </div>
-        <div>
-            <input type="radio" id="mujer" name="sexo" value="Mujer">
-            <label for="mujer">Mujer</label>
-        </div>
-        <div>
-            <input type="radio" id="otro" name="sexo" value="Otro">
-            <label for="otro">Otro</label>
-        </div>
-    </div>
-    <br>
-    <div>
-        <label for="pais">País:</label>
-        <select class="input-form" name="pais" id="pais">
-            <option value="Selecciona país">Seleccionar país </option>
-            <option value="Argentina">Argentina</option>
-            <option value="Bolivia">Bolivia</option>
-            <option value="Brasil">Brasil</option>
-            <option value="Chile">Chile</option>
-            <option value="Colombia">Colombia</option>
-            <option value="Ecuador">Ecuador</option>
-            <option value="Paraguay">Paraguay</option>
-            <option value="Peru">Peru</option>
-            <option value="Uruguay">Uruguay</option>
-            <option value="Venezuela">Venezuela</option>
-            <option value="Otro">Otro</option>
-        </select>
-    </div>
-    <div class="cont-btn-imgUsuario">
-        <label for="img-usuario">⬆ Imagen de usuario</label>
-        <input type="file" name="img-usuario" id="img-usuario">
-    </div>
-    <div id="errores"></div>
-    <button class="modificar" type="submit">Modificar</button>
-</form>
-<br>
-<a href="/tabla_usuarios.html" style="color: black;">Volver a Tabla de Usuarios</a>
-
-                   
-              </div>
-        </section>
     </main>
-    <script src="../js/editar_usuario.js"></script>
-    <script src="../js/header.js"></script>
-    <script src="../js/datos_editar.js"></script> 
-
+    
+    <footer></footer>
     <script>
- function enviarFormulario(event) {
-            event.preventDefault();
-            let form = event.target;
-            let formData = new FormData(form);
-
-            fetch(form.action, {
-                method: 'POST',
-                headers: {
-                    'X-HTTP-Method-Override': 'PUT',
-                },
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error en la solicitud');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Respuesta del servidor:', data);
-                mostrarAlerta('Usuario actualizado correctamente');
-            })
-            .catch(error => {
-                console.error('Error al enviar la solicitud:', error);
-            });
-        }
-
-        function mostrarAlerta(mensaje) {
-            let alerta = document.getElementById('alerta');
-            alerta.textContent = Enviado;
-            alerta.style.display = 'block';
-        
-        }
+        const urls = {
+            tabla_usuarios: "{{ url_for('tabla_usuarios') }}",
+            ingresar_usuario: "{{ url_for('ingresar_usuario') }}"
+        };
     </script>
+    <script src="{{ url_for('static', filename='js/editar_usuario.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/header_editar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/datos_editar.js') }}"></script>
 </body>
 </html>
+

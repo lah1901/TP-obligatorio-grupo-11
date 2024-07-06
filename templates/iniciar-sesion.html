@@ -108,7 +108,12 @@
             <p id="derechos">&copy; 2024 <b>Ratón Gamer</b> - Todos los Derechos Reservados.</p>
         </div>
     </footer>
-
+    <script>
+        const urls = {
+            ingresar_usuario: "{{ url_for('ingresar_usuario') }}",
+            tabla_usuarios: "{{url_for ('tabla_usuarios')}}",
+        };
+    </script>
     <script src="../static/js/iniciar-sesion.js"></script>
 </body>
 </html>
