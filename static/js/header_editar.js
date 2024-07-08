@@ -12,7 +12,7 @@
         </div>
 
         <p id="nombre-web">Ratón Gamer</p>
-        <p id="app-admin">App Admin2</p>
+        <p id="app-admin">App Admin</p>
 
         <nav class="menu">
             <a class="hipervinc-header" href="${urls.tabla_usuarios}">Tabla usuarios</a>

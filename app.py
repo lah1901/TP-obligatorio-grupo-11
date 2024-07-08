@@ -124,6 +124,7 @@ def usuario():
     for objeto in all_registros:
         data_serializada.append({"id":objeto.id, "nombre":objeto.nombre, "apellido":objeto.apellido, "nombre_usuario":objeto.nombre_usuario, "correo":objeto.correo, "contraseña":objeto.contraseña, "sexo":objeto.sexo, "pais":objeto.pais, "imagen":objeto.imagen})
 
+   
 @app.route('/update/<int:id>', methods=['POST'])
 def update(id):
     # Obtener los datos del formulario enviado
@@ -157,7 +158,6 @@ def update(id):
     data_serializada = [{"id":usuario.id, "nombre":usuario.nombre, "apellido":usuario.apellido, "nombre_usuario":usuario.nombre_usuario, "correo_electronico":usuario.correo, "contraseña":usuario.contraseña, "sexo":usuario.sexo, "pais":usuario.pais, "imagen":usuario.imagen, "rol":usuario.rol}]
     
     return jsonify(data_serializada)
-   
 
 @app.route('/form', methods=['GET', 'POST'])
 def registrarForm():

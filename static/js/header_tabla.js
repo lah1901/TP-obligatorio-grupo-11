@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
 
         <p id="nombre-web">Ratón Gamer</p>
-        <p id="app-admin">App AdminHOLA</p>
+        <p id="app-admin">App Admin</p>
 
         <nav class="menu">
             <a id="ingresarUsuarioLink" href="#">Ingresar Usuario</a>
