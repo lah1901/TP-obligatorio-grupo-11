@@ -37,6 +37,17 @@ class Usuario(db.Model):
     imagen = db.Column(db.String(200))
     rol = db.Column(db.String(8), nullable=False, default='usuario')
 
+    def __init__(self, nombre, apellido, nombre_usuario, correo, contraseña, sexo, pais=None, imagen=None, rol=1):
+        self.nombre = nombre
+        self.apellido = apellido
+        self.nombre_usuario = nombre_usuario
+        self.correo = correo
+        self.contraseña = contraseña
+        self.sexo = sexo
+        self.pais = pais
+        self.imagen = imagen
+        self.rol = rol
+        
     def __repr__(self):
         return f"<Usuario {self.nombre_usuario}>"
 
@@ -81,10 +92,6 @@ def foro():
     else:
         mensaje = 'Por favor inicia sesión para acceder al foro.'
         return render_template('iniciar-sesion.html', mensaje=mensaje)
-
-@property
-def imagen_path(self):
-    return 'temp/' + self.imagen if self.imagen else None
 
 @app.route('/tabla_usuarios')
 def tabla_usuarios():
@@ -269,7 +276,8 @@ def registro():
             contraseña=data['contraseña'],
             sexo=data['sexo'],
             pais=data['pais'],
-            imagen=data['imagen']
+            imagen=data['imagen'],
+            rol=data['rol']
         )
 
         # Añadir y confirmar el nuevo registro en la base de datos
