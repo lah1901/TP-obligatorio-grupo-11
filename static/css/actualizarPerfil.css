@@ -1,0 +1,632 @@
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poetsen+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* Reset de márgenes y paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+h1 {
+    margin: 0;
+    font-family: "Bebas Neue";
+}
+
+a{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poetsen one", sans-serif;
+}
+p{
+    margin-left: 25px;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    line-height: 28px;
+}
+/* Tipografías */
+body {
+    width: 100%;
+    font-family: "Poetsen One", sans-serif;
+}
+
+.roboto-regular {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.roboto-medium {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.bebas-neue-regular {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+/*::::: Encabezado :::::*/
+#cont-header {
+    background-image: url('../img/img-header-inicio.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #05070d;
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+ }
+
+#logo-header{
+    width: 100px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #D966ba;
+    margin-left: 10px;
+    margin-right: 10px;
+    animation:change-color 7s infinite linear normal;
+}
+@keyframes change-color{
+    0%{
+        box-shadow: 0 0 20px #D966ba
+    }
+    50%{
+        box-shadow: 0 0 10px #52B5F2;
+    }
+    100%{
+        box-shadow: 0 0 20px #D966ba;
+    }
+}
+#nombre-web {
+    font-family: "poetsen One";
+    color: #d966ba;
+    font-size: 40px;
+    margin-right: 380px;
+    border-color: #0a141d;
+    box-sizing:border-box;
+    padding: 2px;
+}
+
+#menu-header a:hover {
+    color: rgb(215, 102, 185); /* Cambia el color al hacer hover */
+    
+}
+#menu-header {
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.hipervinc-header {
+    text-decoration: none;
+    border: 2px solid rgba(215, 102, 185, 0.45);
+    border-radius: 10px;
+    text-align: center;
+    display: inline-block;
+    width: 110px;
+    height: 40px;
+    background-color: rgba(10, 26, 42, 0.70);
+    margin: 10px 0 0 0px;
+    padding: 8px;
+    font-family: "poetsen One";
+    font-size:14px;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+/* Imagen de perfil */
+.avatar-upload {
+    position: relative;
+    max-width: 205px;
+    margin: 30px auto;
+    margin-left: 100px;
+    transition: height 0.5s ease;
+}
+
+.avatar-edit {
+    position: absolute;
+    right: 60px;
+    z-index: 1;
+    top: 10px;
+}
+
+.avatar-edit input {
+    display: none;
+}
+
+.avatar-edit input + label {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 0;
+    border-radius: 100%;
+    background: #FFFFFF;
+    border: 2px solid rgb(217, 102, 186);
+    box-shadow: 0px 2px 2px 0px rgba(217, 102, 186, 0.5);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all .2s ease-in-out;
+}
+
+.avatar-edit input + label:hover {
+    background: #f1f1f1;
+    box-shadow: 1px 3px 3px 1px rgba(217, 102, 186, 0.5);
+}
+
+.avatar-edit input + label:after {
+    content: "\f040";
+    font-family: 'FontAwesome';
+    color: #757575;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+}
+
+.avatar-preview {
+    width: 130px;
+    height: 130px;
+    position: relative;
+    display: block;
+    border-radius: 100%;
+    border: 5px solid #52B5F2;
+    background-color: #f1f1f1;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-preview div {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.contenedor {
+    width: 100%;
+    height: 90vh;
+    background: linear-gradient(#394564, #686a70);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 1900px;
+    min-height: 600px;
+}
+
+.datos-user {
+    width: 100%;
+    max-width: 450px;
+    height: 96%;
+    min-height: 500px;
+    background-color: #2c2f35;
+    padding:50px 60px 70px;
+    text-align: center;
+    border-radius: 25px;
+}
+
+.datos-user h1{
+    font-size: 33px;
+    margin-top: -30px;
+    margin-bottom: 30px;
+    color:#52B5F9;
+    position:relative;
+    font-family: "Poetsen one", "bebas neue"
+}
+
+.datos-user h1::after {
+    content: "";
+    width: 50px;
+    height: 4px;
+    border-radius: 3px;
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.input-campos{
+    background-color: #515966;
+    margin: 15px 0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    transition: max-height 0.5s;
+    overflow: hidden;
+}
+
+input{
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: none;
+    padding: 13px 13px;
+    color: #FFFF;
+}
+input::placeholder{
+    color: #52B5F9;
+}
+
+.input-campos img{
+    margin-left: 10px;
+    width: 25px;
+    border-radius: 5px;
+    border:1px solid #52B5F2;
+}
+
+form a{
+    color:#D966ba;
+    margin-left: 6px;
+    margin-bottom: 10px;
+    font-size: 14px; 
+  }
+form p{
+  color:#52B5F2;
+  text-align: left;
+  margin-left: 4px; 
+}
+.botones{
+    width: 100%;
+    margin: 13px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.botones button{
+height: 40px;
+flex-basis: 48%;
+font-family: "Roboto";
+font-size: 15px;
+background-color: #52B5F2;
+color: antiquewhite;
+border-radius: 10px;
+border: 0;
+outline: 0;
+cursor: pointer;
+transition: background 1s;
+}
+.input-grupo{
+    min-height: 200px;
+}
+.botones button.boton-ingreso{
+    background-color:#D966ba;
+    color: #fafafa;
+}
+
+
+/*::::: Pie de Pagina :::::*/
+#cont-grupo-1{
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #0a141d;
+    padding-bottom: 30px;
+}
+
+#logo-footer{
+    width: 100px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 350px;
+    animation:change-color 7s infinite linear normal;
+}
+@keyframes change-color{
+    0%{
+        box-shadow: 0 0 20px #D966ba
+    }
+    50%{
+        box-shadow: 0 0 10px #52B5F2;
+    }
+    100%{
+        box-shadow: 0 0 20px #D966ba;
+    }
+}
+
+.titulo-footer{
+    color: #fff;
+    margin-bottom: 25px;
+    font-family: Poetsen one, roboto;
+    font-size: 20px;
+}
+
+#cont-webjuegos{
+    margin-top:50px;
+    margin-right: 250px;
+}
+
+.webs-juegos{
+    text-decoration: none;
+    width: 45px;
+    height: 45px;
+    line-height: 40px;
+    color: #52B5F2;
+    font-family: "poetsenOne";
+} 
+
+#cont-webjuegos a:hover{
+    color: #D966ba;
+}
+
+#cont-redes{
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+.img-red{
+    width:30px;
+    height: 30px;
+}
+
+#cont-grupo-2{
+    text-align: center;
+    padding-top: 20px;
+    align-items: center;
+    background-color: #0a1a2a;
+    height: 10vh;
+    width: 100%;
+}
+
+#derechos{
+    font-family: "roboto";
+    color: #fff;
+    font-size: 20px;
+}
+
+
+@media screen and (max-width:1440px){
+    #nombre-web {
+        margin-right: 380px;
+    }
+
+    .hipervinc-header{
+        margin-left: 25px;
+    }
+}
+ 
+@media screen and (max-width:1024px){
+    #nombre-web {
+        margin-right: 90px;
+    }
+
+    .hipervinc-header{
+        font-size:14px;
+    }
+    #cont-webjuegos{
+        margin-right: 180px;
+        }
+}
+@media screen and (max-width:768px) {
+    #menu-header{ 
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+    }
+
+    #nombre-web {
+        margin-right: 80px;
+    }
+    h2 {
+        font-family: "roboto";
+        font-size: 85px;
+        background-color: #0008;
+        border-radius: 10px;
+        box-sizing:border-box;
+    }
+    #logo-footer{
+        margin-right: 130px;
+    }
+
+    .hipervinc-header {
+        font-size:12px;
+    }
+
+    #cont-webjuegos{
+        margin-right: 140px;
+    }
+}
+
+@media screen and (max-width:425px) {
+    header {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    #nombre-web {
+        font-size: 22px;
+        margin-right: 45px;
+    }
+    
+    #logo-header {
+        width: 75px;
+        height: 75px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .hipervinc-header {
+        margin-left: 13px;
+        font-size: 10px;
+        width: 75px;
+        height: 37px;
+    }
+
+    #menu-header{
+        margin-left: 20px;
+    }
+    .texto{
+        font-size: 40px;
+    }
+
+    footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #logo-footer {
+        margin-left: 10px;
+        margin-right: 50px;
+        height: 75px;
+        width: 75px;
+    }
+
+    .titulo-footer{
+        font-size: 16px;
+    }
+
+    #cont-webjuegos{
+        margin-right: 40px;
+    }
+
+    #cont-redes{
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
+
+    #derechos{
+        font-size: 14px;
+    }
+
+    #animacion{
+        background-position: center;
+    }
+
+    .titulo-seccion{
+       font-size: 40px;
+    }
+}
+@media screen and (max-width:375px) {
+    #menu-header{ 
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+    }
+    
+    #nombre-web {
+        font-size: 20px;
+        margin-right: 13px;
+    }
+    
+    #logo-header {
+        width: 65px;
+        height: 65px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .hipervinc-header {
+        font-size: 8px;
+        width: 75px;
+        height: 30px;
+    }
+    .texto{
+        font-size: 50px;
+    }
+
+    #logo-footer{
+        margin-right: 30px;
+    }
+
+    #derechos{
+        font-size: 13px;
+    }
+
+    #animacion{
+        background-position: center;
+    }
+}
+@media screen and (max-width:320px) {
+    #menu-header{ 
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+    }
+    #avatar{
+        width: 100px;
+        height: 100px;
+    }
+    #nombre-web {
+        font-size: 18px;
+        margin-right: 2px;
+    }
+    
+    #logo-header {
+        width: 60px;
+        height: 60px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .hipervinc-header {
+        font-size: 8px;
+        width: 70px;
+        height: 35px;
+        margin-left: 10px;
+    }
+
+    .rank2024-carrusel {
+        width: 250px;
+        margin-top:20px;
+        margin-bottom: 30px;
+    }
+
+    .rank2024-carrusel img {
+        height: 70vh;
+    }
+
+    .texto{
+        font-size: 40px;
+    }
+    
+    .noticia{
+        width: 80vw;
+    }
+
+    #cont-webjuegos{
+        margin-right: 20px;
+    }
+
+    #derechos{
+        font-size: 10px;
+    }
+
+    .titulo-seccion{
+        font-size: 35px;
+        padding-top: 30px;
+        padding-bottom: 20px;
+    }
+    #titulo{
+        font-size: 25px;
+        padding-top: 5px;
+    }
+
+    .hipervinc-not {
+        font-size: 16px;
+    }
+
+    .intro-not{
+        font-size: 14px;
+    }
+
+    #animacion{
+        background-position: center;
+        margin-bottom: 45px;
+    }
+
+    .noticia{
+        margin-top: 10px;
+    }
+}
+
+

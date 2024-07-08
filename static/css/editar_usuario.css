@@ -28,7 +28,6 @@ body{
     src: url('../../assets/fonts/Yantramanav/Yantramanav-Black.ttf');
 }
 
-
 /*::::: Encabezado :::::*/
 #header {
     background-color: #0a1a2a;
@@ -92,15 +91,9 @@ a:hover{
     align-items: center;
 }
 
-
-
-
-
-
 /*::::: Main :::::*/
 .container-form{
     background-image: url('../img/img-main.jpg');
-    
     height: auto;
     display: flex;
     flex-direction: column;
@@ -116,9 +109,7 @@ form{
     padding: 5px;
     row-gap: 15px;
     background-color: white;
-    border-radius: 15px;
-    
-    
+    border-radius: 15px;  
 }
 
 .entrada{
@@ -127,8 +118,7 @@ form{
 
 label{
     font-size: 16px;
-    font-family: "bebasNeue";
-    
+    font-family: "bebasNeue";  
 }
 
 input{
@@ -180,9 +170,6 @@ input:disabled
 {
 	background-color   : #d3d6d8;
 }
-
-
-
 
 
 @media screen and (max-width:768px){

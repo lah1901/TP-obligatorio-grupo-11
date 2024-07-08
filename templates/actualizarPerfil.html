@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/registrarse.css">
+    <link rel="stylesheet" href="../static/css/actualizarPerfil.css">
     <script src="https://kit.fontawesome.com/ce63497daf.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../static/img/icon-fontawesome.png" type="image/png">
     <title>Registrarse</title>
@@ -22,93 +22,74 @@
             <nav id="menu-header">
                 <a class="hipervinc-header" href="{{ url_for('index') }}">Inicio</a>
                 <a class="hipervinc-header" href="{{ url_for('trailers') }}">Trailers</a>
-                <a class="hipervinc-header" href="{{ url_for('') }}">Mi perfil</a>
+                <a class="hipervinc-header" href="{{ url_for('actualizarPerfil') }}">Mi perfil</a>
                 <a class="hipervinc-header" href="{{ url_for('cerrar_sesion') }}">Cerrar Sesion</a>
             </nav>
         </div>
 
     </header>
 
-    <main>
-        <div id="cont-main">
-
-            <div id="cont-formulario">
-
-                <div id="titulo">
-                    <h1>Registrate gratis</h1>
-                </div>
-                <div id="formulario">
-                    <form class="campos-form" action="{{ url_for('registrarForm')}}" method="post"
-                        enctype="multipart/form-data" target="_blank" onsubmit="return testearDatos()">
-                        <div>
-                            <label for="nombre">Nombre:</label>
-                            <input class="input-form" type="text" id="nombre" name="nombre" required>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="static/css/registrarse.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/ce63497daf.js" crossorigin="anonymous"></script>
+        <script src="registro.js"defer></script>
+        <link rel="icon" href="Imagenes/Logos/Logo.png" type="image/png">
+        <title>Registro</title>
+    </head>
+    <body>
+        <div class="contenedor">
+            <div class="datos-user">
+                <h1 id="titulo">Actualiza tus datos</h1>
+                <form>
+                    <div class="avatar-upload" id="avatar">  
+                        <div class="avatar-edit" >
+                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                            <label for="imageUpload">
+                            </label>
                         </div>
-                        <div>
-                            <label for="apellido">Apellido:</label>
-                            <input class="input-form" type="text" id="apellido" name="apellido" required>
-                        </div>
-                        <div>
-                            <label for="nombreUsuario">Nombre de usuario:</label>
-                            <input class="input-form" type="text" id="nombreUsuario" name="nombreUsuario">
-                        </div>
-                        <div>
-                            <label for="correo">Correo Electrónico:</label>
-                            <input class="input-form" type="email" id="correo" name="correo" required>
-                        </div>
-                        <div>
-                            <label for="contraseña">Contraseña:</label>
-                            <input class="input-form" type="password" id="contraseña" name="contraseña" required>
-                        </div>
-                        <div id="radio-button">
-                            <p>Sexo:</p>
-                            <div>
-                                <input type="radio" id="hombre" name="sexo" value="Hombre" checked>
-                                <label for="hombre">Hombre</label>
+                        <div class="avatar-preview" id="avatar">
+                            <div id="imagePreview" style="background-image: url(../static/img/Avatares/avatar-defecto.svg);">
                             </div>
-                            <div>
-                                <input type="radio" id="mujer" name="sexo" value="Mujer">
-                                <label for="mujer">Mujer</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="otro" name="sexo" value="Otro">
-                                <label for="otro">Otro</label>
-                            </div>
-
                         </div>
-                        <div>
-                            <label for="pais">País:</label>
-                            <select class="input-form" name="pais" id="pais">
-                                <option value="Selecciona país">Seleccionar país </option>
-                                <option value="Argentina">Argentina</option>
-                                <option value="Bolivia">Bolivia</option>
-                                <option value="Brasil">Brasil</option>
-                                <option value="Chile">Chile</option>
-                                <option value="Colombia ">Colombia</option>
-                                <option value="Ecuador">Ecuador</option>
-                                <option value="Paraguay">Paraguay</option>
-                                <option value="Peru">Peru</option>
-                                <option value="Uruguay">Uruguay</option>
-                                <option value="Venezuela">Venezuela</option>
-                                <option value="Otro">Otro</option>
-                            </select>
-                        </div>
-                        <div class="cont-btn-imgUsuario">
-                                <label for="img-usuario">⬆ Imagen de usuario</label>
-                                <input type="file" name="img-usuario" id="img-usuario">
-                        </div>
-                        <div id="errores"></div>
-                        <div>
-                            <button id="crear-cuenta" type="submit">CREAR CUENTA</button>
-                        </div>
-                    </form>
-                    <div id="imagen-form">
-                        <img id="mario" src="../static/img/mario-bros.png" alt="">
                     </div>
-                </div>
+                    <div class="input-grupo">
+                        <div class="input-campos" id="userId">
+                            <img src="../static/img/Avatares/Avatar-raton.svg"></img>
+                            <input type="text"placeholder="Usuario">
+                        </div>
+                        <div class="input-campos" id="email">
+                            <img src="../static/img/Avatares/avatar-email.jpeg" alt="Usuario">
+                            <input type="text"placeholder="Email">
+                        </div>
+                        <div class="input-campos" id="password">
+                            <img src="../static/img/Avatares/Llave-contraseña.jpg">
+                            <input type="password" placeholder="Contraseña">
+                        </div>
+                        <div class="input-campos" id="password">
+                            <img src="../static/img/Avatares/Llave-contraseña.jpg">
+                            <input type="password" placeholder="Confirmar Contraseña">
+                        </div>
+                        <div>
+                            <p>¿No te acordas la contraseña?<a href="#"> Recupérala</a> </p>
+                        </div>
+                        <div class="botones">
+                            <button class="modificar" type="button" onclick="modificar()">Actualizar</button>
+                            <!-- <button id="signIn" type="button" class="boton-ingreso">Ingresar</button> -->
+                        </div>
+                    </div>
+    
+                </form>
             </div>
         </div>
-    </main>
+    </body>
+    </html>
 
     <footer>
         <div id="cont-grupo-1">

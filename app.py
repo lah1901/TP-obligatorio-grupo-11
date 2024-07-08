@@ -47,7 +47,7 @@ class Usuario(db.Model):
         self.pais = pais
         self.imagen = imagen
         self.rol = rol
-        
+
     def __repr__(self):
         return f"<Usuario {self.nombre_usuario}>"
 
@@ -85,6 +85,10 @@ def trailers():
 def reseñas():
     return render_template('reseñas.html')
 
+@app.route('/actualizarPerfil')
+def actualizarPerfil():
+    return render_template('actualizarPerfil.html')
+
 @app.route('/foro')
 def foro():
     if session.get('logueado'):
@@ -108,8 +112,8 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 # Retornar todos los registros en un Json
-@app.route("/usuarios",  methods=['GET'])
-def usuarios():
+@app.route("/usuario",  methods=['GET'])
+def usuario():
     # Consultar en la tabla todos los usuarios
     # all_registros -> lista de objetos
     all_registros = Usuario.query.all()
@@ -120,32 +124,40 @@ def usuarios():
     for objeto in all_registros:
         data_serializada.append({"id":objeto.id, "nombre":objeto.nombre, "apellido":objeto.apellido, "nombre_usuario":objeto.nombre_usuario, "correo":objeto.correo, "contraseña":objeto.contraseña, "sexo":objeto.sexo, "pais":objeto.pais, "imagen":objeto.imagen})
 
-@app.route('/editar_usuario/<int:id>', methods=['GET', 'POST', 'PUT'])
-def editar_usuario(id):
-    # Lógica para obtener y editar el usuario con el ID especificado
-    usuario = Usuario.query.get_or_404(id)
+@app.route('/update/<int:id>', methods=['POST'])
+def update(id):
+    # Obtener los datos del formulario enviado
+    nombre_usuario = request.form.get('nombre_usuario')
+    rol = request.form.get('rol')
+    # usuario = Usuario.query.get_or_404(id)
     
-    if request.method == 'POST' :
-        # or request.method == 'PUT'
-        # Actualizar el usuario con los datos recibidos del formulario o JSON
-        usuario.nombre = request.json.get('nombre', usuario.nombre)
-        usuario.apellido = request.json.get('apellido', usuario.apellido)
-        usuario.nombre_usuario = request.json.get('nombre_usuario', usuario.nombre_usuario)
-        usuario.correo = request.json.get('correo', usuario.correo)
-        usuario.contraseña = request.json.get('contraseña', usuario.contraseña)
-        usuario.sexo = request.json.get('sexo', usuario.sexo)
-        usuario.pais = request.json.get('pais', usuario.pais)
-        usuario.imagen = request.json.get('imagen', usuario.imagen)
-        usuario.rol = request.json.get('rol', usuario.rol)
+    data = request.get_json()
 
-        db.session.commit()
-        
-        # Redirigir a la página de tabla de usuarios o a donde sea necesario después de editar
-        return redirect(url_for('tabla_usuarios'))
+    nombre = request.json["nombre"]
+    apellido=request.json['apellido']
+    nombre_usuario=request.json['nombre_usuario']
+    correo=request.json['correo']
+    contraseña=request.json['contraseña']
+    sexo=request.json['sexo']
+    pais=request.json['pais']
+    imagen=request.json['imagen']
+    rol= request.json['rol']
 
-    # Renderizar el formulario de edición con los datos del usuario
-    return render_template('editar_usuario.html', usuario=usuario)
-
+    usuario.nombre=nombre
+    usuario.apellido=apellido
+    usuario.nombre_usuario=nombre_usuario
+    usuario.correo=correo
+    usuario.contraseña=contraseña
+    usuario.sexo=sexo
+    usuario.pais=pais
+    usuario.imagen=imagen
+    usuario.rol=rol
+    db.session.commit()
+    
+    data_serializada = [{"id":usuario.id, "nombre":usuario.nombre, "apellido":usuario.apellido, "nombre_usuario":usuario.nombre_usuario, "correo_electronico":usuario.correo, "contraseña":usuario.contraseña, "sexo":usuario.sexo, "pais":usuario.pais, "imagen":usuario.imagen, "rol":usuario.rol}]
+    
+    return jsonify(data_serializada)
+   
 
 @app.route('/form', methods=['GET', 'POST'])
 def registrarForm():
@@ -158,7 +170,7 @@ def registrarForm():
         sexo = request.form['sexo']
         pais = request.form.get('pais')
         imagen = None
-        
+            
         # Manejo de la imagen de usuario
         if 'img-usuario' in request.files:
             file = request.files['img-usuario']
@@ -242,19 +254,17 @@ def cerrar_sesion():
     session.clear()
     return redirect(url_for('index'))
 
-@app.route('/borrar/<id>', methods=['DELETE'])
+@app.route('/borrar/<int:id>', methods=['DELETE'])
 def borrar(id):
-    
-    # Se busca a la usuarios por id en la DB
+    # Lógica para eliminar al usuario por su ID
     usuario = Usuario.query.get(id)
-
-    # Se elimina de la DB
-    db.session.delete(usuario)
-    db.session.commit()
-
-    data_serializada = [{"id":usuario.id, "nombre":usuario.nombre, "apellido":usuario.apellido, "nombre_usuario":usuario.nombre_usuario, "correo":usuario.correo, "contraseña":usuario.contraseña, "sexo":usuario.sexo, "pais":usuario.pais, "imagen":usuario.imagen}]
-
-    return jsonify(data_serializada)
+    if usuario:
+        db.session.delete(usuario)
+        db.session.commit()
+        return redirect(url_for('tabla_usuarios'))  # Redirigir a la página de tabla_usuarios después de eliminar
+    else:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+        
 
 @app.route("/registro", methods=['POST']) 
 def registro():

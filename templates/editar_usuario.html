@@ -29,60 +29,61 @@
                     </table>
                 </div>
                 <h1>Actualizar Datos</h1>
-                <form action="{{ url_for('editar_usuario', id=usuario.id) }}" method="POST">
+                <form class="campos-form" action="{{ url_for('update', id=usuario.id) }}" method="post">
                     <div>
+                        <!-- value="{{ usuario.id }}" -->
                         <label for="id">ID</label>
-                        <input type="number" name="id" id="id" value="{{ usuario.id }}" disabled>
+                        <input type="number" name="id" id="id" disabled>
                     </div>
-    
+            
                     <div>
                         <label for="nombre">Nombre:</label>
-                        <input type="text" name="nombre" id="nombre" value="{{ usuario.nombre }}">
+                        <input class="input-form" type="text" id="nombre" name="nombre"  disabled>
                     </div>
-    
+            
                     <div class="entrada">
                         <label for="apellido">Apellido:</label>
-                        <input type="text" name="apellido" id="apellido" value="{{ usuario.apellido }}">
+                        <input class="input-form" type="text" name="apellido" id="apellido" disabled>
                     </div>
-    
+            
                     <div class="entrada">
                         <label for="nombre_usuario">Nombre de usuario:</label>
-                        <input type="text" name="nombre_usuario" id="nombre_usuario" value="{{ usuario.nombre_usuario }}">
+                        <input class="input-form" type="text" name="nombre_usuario" id="nombre_usuario">
                     </div>
-    
+            
                     <div class="entrada">
-                        <label for="correo">Correo electrónico:</label>
-                        <input type="email" name="correo" id="correo" value="{{ usuario.correo }}">
+                        <label for="correo_electronico">Correo electrónico:</label>
+                        <input class="input-form" type="email" name="correo" id="correo" disabled>
                     </div>
-    
+            
                     <div class="entrada">
                         <label for="contraseña">Contraseña:</label>
-                        <input type="password" name="contraseña" id="contraseña" value="{{ usuario.contraseña }}">
+                        <input class="input-form" type="password" name="contraseña" id="contraseña" disabled>
                     </div>
-    
+            
                     <div class="entrada">
                         <label for="sexo">Sexo:</label>
-                        <input type="text" name="sexo" id="sexo" value="{{ usuario.sexo }}">
+                        <input class="input-form" type="text" name="sexo" id="sexo"  disabled>
                     </div>
-    
+            
                     <div class="entrada">
                         <label for="pais">País:</label>
-                        <input type="text" name="pais" id="pais" value="{{ usuario.pais }}">
+                        <input class="input-form" type="text" name="pais" id="pais" disabled>
                     </div>
-    
+            
                     <div class="entrada">
                         <label for="imagen">Imagen:</label>
-                        <input type="text" name="imagen" id="imagen" value="{{ usuario.imagen }}">
+                        <input class="input-form" type="text" name="imagen" id="imagen" disabled>
                     </div>
-
+            
                     <div>
-                        <label for="rol">Rol de usuario (Ingrear 1- USUARIO 2- ADMINISTRADOR):</label>
-                        <input class="input-form" type="rol" id="rol" name="rol" value="{{ usuario.rol }}">
+                        <label for="rol">Rol de usuario (Ingresar 1- USUARIO 2- ADMINISTRADOR):</label>
+                        <input  type="number" id="rol" name="rol">
                     </div>
-    
-                    <button class="modificar" type="button" onclick="modificar()">MODIFICAR</button>
+                    
+                    <button class="modificar" type="submit">MODIFICAR</button>
+
                 </form>
-    
                 <br>
                 <a href="{{ url_for('tabla_usuarios') }}" style="color: black;">Volver a Tabla de Usuarios</a>
             </div>

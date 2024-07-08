@@ -27,7 +27,7 @@ body {
 
 /*::::: Encabezado :::::*/
 #cont-header {
-    background-image: url('../img/img-header-inicio.gif');
+    /* background-image: url('../img/img-header-inicio.gif'); */
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #05070d;
